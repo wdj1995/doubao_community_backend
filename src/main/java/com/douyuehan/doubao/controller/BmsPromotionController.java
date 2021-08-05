@@ -3,12 +3,10 @@ package com.douyuehan.doubao.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.douyuehan.doubao.common.api.ApiResult;
 import com.douyuehan.doubao.model.entity.BmsBillboard;
+import com.douyuehan.doubao.model.entity.BmsPromotion;
 import com.douyuehan.doubao.model.entity.BmsTip;
-import com.douyuehan.doubao.service.IBmsTipService;
-import com.douyuehan.doubao.service.impl.IBmsBillboardServiceImpl;
-import org.springframework.stereotype.Controller;
+import com.douyuehan.doubao.service.IBmsPromotionService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,16 +14,18 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tip")
-public class BmsTipController {
+@RequestMapping("/promotion")
+public class BmsPromotionController extends BaseController{
 
     @Resource
-    private IBmsTipService bmsTipService;
+    private IBmsPromotionService bmsPromotionService;
 
-    @GetMapping("/today")
-    public ApiResult<BmsTip> getRandomTip(){
-        BmsTip tip = bmsTipService.getRandomTip();
-        return ApiResult.success(tip); //返回json字符串数组
+    @GetMapping("/all")
+    public ApiResult<List<BmsPromotion>> list(){
+        List<BmsPromotion> list = bmsPromotionService.list();
+        return ApiResult.success(list);
     }
+
+
 
 }
